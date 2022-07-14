@@ -1,4 +1,4 @@
-name: mch-qcmn-epn-full-remote-internal-dpl-clock
+name: mch-qcmn-epn-full-remote-GLO-MUONTracks-proxy
 defaults:
   log_task_output: none
   exit_transition_timeout: 15
@@ -13,90 +13,20 @@ wants:
   cpu: 0.01
   memory: 1
 bind:
-  - name: from_internal-dpl-clock_to_GLO-MUONTracks-proxy
+  - name: from_GLO-MUONTracks-proxy_to_GLO-MERGER-MUONTracks1l-0
     type: push
     transport: shmem
     addressing: ipc
     rateLogging: "{{ fmq_rate_logging }}"
     sndBufSize: 4
     rcvBufSize: 4
-  - name: from_internal-dpl-clock_to_MCH-MCHPreclusters-proxy
-    type: push
-    transport: shmem
-    addressing: ipc
+  - name: GLO-MUONTracks-proxy
+    type: sub
+    transport: zeromq
+    addressing: tcp
     rateLogging: "{{ fmq_rate_logging }}"
-    sndBufSize: 4
-    rcvBufSize: 4
-  - name: from_internal-dpl-clock_to_MCH-MCHRofs-proxy
-    type: push
-    transport: shmem
-    addressing: ipc
-    rateLogging: "{{ fmq_rate_logging }}"
-    sndBufSize: 4
-    rcvBufSize: 4
-  - name: from_internal-dpl-clock_to_MCH-MCHTracks-proxy
-    type: push
-    transport: shmem
-    addressing: ipc
-    rateLogging: "{{ fmq_rate_logging }}"
-    sndBufSize: 4
-    rcvBufSize: 4
-  - name: from_internal-dpl-clock_to_MCH-QcTaskMCHDigits-proxy
-    type: push
-    transport: shmem
-    addressing: ipc
-    rateLogging: "{{ fmq_rate_logging }}"
-    sndBufSize: 4
-    rcvBufSize: 4
-  - name: from_internal-dpl-clock_to_MCH-QcTaskMCHErrors-proxy
-    type: push
-    transport: shmem
-    addressing: ipc
-    rateLogging: "{{ fmq_rate_logging }}"
-    sndBufSize: 4
-    rcvBufSize: 4
-  - name: from_internal-dpl-clock_to_GLO-MERGER-MUONTracks1l-0
-    type: push
-    transport: shmem
-    addressing: ipc
-    rateLogging: "{{ fmq_rate_logging }}"
-    sndBufSize: 4
-    rcvBufSize: 4
-  - name: from_internal-dpl-clock_to_MCH-MERGER-MCHPreclusters1l-0
-    type: push
-    transport: shmem
-    addressing: ipc
-    rateLogging: "{{ fmq_rate_logging }}"
-    sndBufSize: 4
-    rcvBufSize: 4
-  - name: from_internal-dpl-clock_to_MCH-MERGER-MCHRofs1l-0
-    type: push
-    transport: shmem
-    addressing: ipc
-    rateLogging: "{{ fmq_rate_logging }}"
-    sndBufSize: 4
-    rcvBufSize: 4
-  - name: from_internal-dpl-clock_to_MCH-MERGER-MCHTracks1l-0
-    type: push
-    transport: shmem
-    addressing: ipc
-    rateLogging: "{{ fmq_rate_logging }}"
-    sndBufSize: 4
-    rcvBufSize: 4
-  - name: from_internal-dpl-clock_to_MCH-MERGER-QcTaskMCHDigits1l-0
-    type: push
-    transport: shmem
-    addressing: ipc
-    rateLogging: "{{ fmq_rate_logging }}"
-    sndBufSize: 4
-    rcvBufSize: 4
-  - name: from_internal-dpl-clock_to_MCH-MERGER-QcTaskMCHErrors1l-0
-    type: push
-    transport: shmem
-    addressing: ipc
-    rateLogging: "{{ fmq_rate_logging }}"
-    sndBufSize: 4
-    rcvBufSize: 4
+    target: "tcp://*:47789"
+    rcvBufSize: 32
 command:
   shell: true
   log: "{{ log_task_output }}"
@@ -126,7 +56,7 @@ command:
     - "--resources-monitoring"
     - "'{{ resources_monitoring }}'"
     - "--id"
-    - "'internal-dpl-clock'"
+    - "'GLO-MUONTracks-proxy'"
     - "--shm-monitor"
     - "'false'"
     - "--log-color"
@@ -204,3 +134,13 @@ command:
     - "-1"
     - "--workflow-suffix"
     - "''"
+    - "--end-value-enumeration"
+    - "-1"
+    - "--orbit-multiplier-enumeration"
+    - "'0'"
+    - "--orbit-offset-enumeration"
+    - "'0'"
+    - "--start-value-enumeration"
+    - "'0'"
+    - "--step-value-enumeration"
+    - "'1'"
