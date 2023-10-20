@@ -842,6 +842,7 @@ defaults:
       - none
       - minimal-dpl
       - zdc-raw-qc
+      - zdc-calib-qc
       - qc-daq
       - qcmn-daq-local
   zdc_qc_remote_workflow: !public
