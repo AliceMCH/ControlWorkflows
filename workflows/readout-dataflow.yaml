@@ -138,6 +138,9 @@ defaults:
       - ctp-reco-12dec-HI-ZNC-TCE
       - ctp-reco-qc
       - ctp-reco-3dec-qc
+      - ctp-reco-3dec-qc-max-input-size-1
+      - ctp-reco-3dec-qc-max-input-size-2
+      - ctp-reco-3dec-qc-max-input-size-3
       - minimal-dpl
       - ctp-raw-qc 
   ctp_qc_remote_workflow: !public
